@@ -5,10 +5,10 @@ const height = document.querySelector("#height");
 const weight = document.querySelector("#weight");
 
 const getNormMale = () => {
-    return (10 * parseInt(weight.textContent, 10) + (6.25 * parseInt(height.textContent, 10)) - (5 * parseInt(age.textContent, 10)) + 5);
+    return (10 * parseInt(weight.value, 10) + (6.25 * parseInt(height.value, 10)) - (5 * parseInt(age.value, 10)) + 5);
 }
 const getNormFemale = () => {
-    return (10 * parseInt(weight.textContent, 10) + (6.25 * parseInt(height.textContent, 10)) - (5 * parseInt(age.textContent, 10)) - 161);
+    return (10 * parseInt(weight.value, 10) + (6.25 * parseInt(height.value, 10)) - (5 * parseInt(age.value, 10)) - 161);
 }
 const getNorm = () => {
     const genderMale = document.querySelector("#gender-male");
