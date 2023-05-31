@@ -7,7 +7,6 @@ const fieldEnergyNorm = counterResultForm.querySelector("#calories-norm");
 const fieldEnergyMinimal = counterResultForm.querySelector("#calories-minimal");
 const fieldEnergyMaximal = counterResultForm.querySelector("#calories-maximal");
 const inputsGroup = document.querySelector(".inputs-group");
-const counterForm = document.querySelector(".counter__form");
 
 const inputsGroupChangeHandler = function (evt) {
     if (evt.target.nodeName === "INPUT" && isFilledParameters()) {
@@ -39,7 +38,7 @@ const inputGroupForResetChangeHandler = function (evt) {
 }
 inputsGroup.addEventListener("change", inputGroupForResetChangeHandler);
 
-const resetButtonClickHandler = function (evt) {
+const resetButtonClickHandler = function () {
     buttonCalculate.disabled = true;
     resetButton.disabled = true;
     counterResultForm.classList.add("counter__result--hidden");
