@@ -1,5 +1,20 @@
 const LOSS_WEIGHT_RATE = 0.15;
 const GAIN_WEIGHT_RATE = 0.15;
+const ActivityRate = {
+    "min": 1.2,
+    "low": 1.375,
+    "medium": 1.55,
+    "high": 1.725,
+    "max": 1.9
+};
+const ValidParameter = {
+    AGE_MIN: 0,
+    AGE_MAX: 130,
+    HEIGHT_MIN: 60,
+    HEIGHT_MAX: 250,
+    WEIGHT_MIN: 2,
+    WEIGHT_MAX: 500
+}
 const age = document.querySelector("#age");
 const height = document.querySelector("#height");
 const weight = document.querySelector("#weight");
@@ -20,18 +35,18 @@ const clearParameters = () => {
  * @returns {boolean}
  */
 const isValidateParameters = () => {
-    return age.value > 0 && age.value < 130 && height.value > 60 && height.value < 250 && weight.value > 2 && weight.value < 500
+    return age.value > ValidParameter.AGE_MIN && age.value < ValidParameter.AGE_MAX && height.value > ValidParameter.HEIGHT_MIN && height.value < ValidParameter.HEIGHT_MAX && weight.value > ValidParameter.WEIGHT_MIN && weight.value < ValidParameter.WEIGHT_MAX
 }
 /**
  * проверка заполненности всех параметров
- * @returns {string}
+ * @returns {boolean}
  */
 const isFilledParameters = () => {
     return age.value && height.value && weight.value;
 }
 /**
  * проверка заполненности хотя бы одного параметра
- * @returns {string}
+ * @returns {boolean}
  */
 const isExistParameter = () => {
     return age.value || height.value || weight.value;
@@ -63,33 +78,26 @@ const getNorm = () => {
  */
 const getActivityRate = () => {
     const activityValue = document.querySelector('[name="activity"]:checked').value;
-    switch (activityValue) {
-        case "min":
-            return 1.2;
-        case "low":
-            return 1.375;
-        case "medium":
-            return 1.55;
-        case "high":
-            return 1.725;
-        case "max":
-            return 1.9;
-    }
+    return ActivityRate[activityValue];
 }
 /**
- * рассчет калорий для поддержания веса
+ * расчет калорий для поддержания веса
  * @returns {number}
  */
 const getEnergyMaintainWeight = () => {
     return Math.round(getActivityRate() * getNorm());
 }
 /**
- * рассч
+ * расчет калорий для снижения веса
  * @returns {number}
  */
 const getEnergyLossWeight = () => {
     return Math.round(getEnergyMaintainWeight() - getEnergyMaintainWeight() * LOSS_WEIGHT_RATE);
 }
+/**
+ * расчет калорий для набора веса
+ * @returns {number}
+ */
 const getEnergyGainWeight = () => {
     return Math.round(getEnergyMaintainWeight() + getEnergyMaintainWeight() * GAIN_WEIGHT_RATE);
 }
